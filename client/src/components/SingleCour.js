@@ -26,6 +26,14 @@ class SingleCour extends Component {
         })
     }
 
+    delete = () => {
+        axios.get(`/cours/delete/${this.state.coursId._id}`)
+            .then((response) => this.props.history.push("/cours"))
+            .catch((error) => {
+            console.log(error);
+        })
+    }
+
     render() {
         const {coursId} = this.state;
         const { isAuthenticated} = this.props.auth;
@@ -34,7 +42,7 @@ class SingleCour extends Component {
             <div>
                 <NavLink to={`/cours/edit/${coursId._id}`} className="btn btn-primary">Edit</NavLink>
                 &nbsp;
-                <a href={`/cours/delete/${coursId._id}`} className="btn btn-danger">Delete</a>
+                <a onClick={this.delete} className="btn btn-danger">Delete</a>
             </div>
         )
         return (
@@ -44,18 +52,8 @@ class SingleCour extends Component {
             <br/>
             <h3>Ecrit par {coursId.author}</h3>
             <br/>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam sapiente sequi modi tenetur enim cupiditate earum ut, maxime ea voluptatum officia nisi provident architecto sed eos natus quod doloremque corrupti.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos aperiam quibusdam consectetur! Quidem repudiandae dolor optio? Alias, voluptate? Obcaecati reiciendis maxime sunt vel eaque illo laboriosam facere sapiente tenetur molestias.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum molestias enim voluptatum est commodi similique, sapiente consequatur hic eaque eligendi quo repellendus nemo animi ratione facere, itaque nulla rerum dolorum.
-            </p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam sapiente sequi modi tenetur enim cupiditate earum ut, maxime ea voluptatum officia nisi provident architecto sed eos natus quod doloremque corrupti.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos aperiam quibusdam consectetur! Quidem repudiandae dolor optio? Alias, voluptate? Obcaecati reiciendis maxime sunt vel eaque illo laboriosam facere sapiente tenetur molestias.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum molestias enim voluptatum est commodi similique, sapiente consequatur hic eaque eligendi quo repellendus nemo animi ratione facere, itaque nulla rerum dolorum.
-            </p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam sapiente sequi modi tenetur enim cupiditate earum ut, maxime ea voluptatum officia nisi provident architecto sed eos natus quod doloremque corrupti.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos aperiam quibusdam consectetur! Quidem repudiandae dolor optio? Alias, voluptate? Obcaecati reiciendis maxime sunt vel eaque illo laboriosam facere sapiente tenetur molestias.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum molestias enim voluptatum est commodi similique, sapiente consequatur hic eaque eligendi quo repellendus nemo animi ratione facere, itaque nulla rerum dolorum.
-            </p>
+            <p>{coursId.body}</p>
+            
             {isAuthenticated ? editLinkGuest : null}
             
         </div>

@@ -33,11 +33,14 @@ class EditCours extends Component {
         const editCours = {
             title : this.state.title,
             body: this.state.body,
-            img: this.state.img
+            // img: this.state.img
             
           }
         axios.post(`/cours/edit/${id}`, editCours)
-            .then(response => this.props.history.push("/cours"))
+            .then(response => {
+                this.props.history.push("/");
+                console.log(response)
+            })      
             .catch(err => console.log(err));
     }
 
@@ -49,27 +52,21 @@ class EditCours extends Component {
 
 
   render() {
-      const { title, author, body } = this.state;
-      const { id } = this.props.match.params;
+      const { title, body } = this.state;
 
     return (
         <div className="container">
                     <br/>
                     <h1>Modifier votre cours</h1>
                     
-                <form onSubmit={this.postData} method='POST' action={`http://localhost:4000/cours/edit/${id}`} encType="multipart/form-data">
+                <form onSubmit={this.onSubmit}>
                     
                     <div className="formgroup">
                     <br/>
                         <label>Titre</label>
                         <input type="Text" name="title" className="form-control" onChange={this.handleOnChange} value={title}/>
                     </div>
-                    
-                    <div className="formgroup">
-                    <br/>
-                        <label>Auteur</label>
-                        <input type="text" name="author" className="form-control" onChange={this.handleOnChange} value={author}/>
-                    </div>
+                
                    
                     <div className="formgroup">
                     <br/>
@@ -77,11 +74,11 @@ class EditCours extends Component {
                         <textarea type="text" name="body" className="form-control" onChange={this.handleOnChange} value={body}/>
                     </div>
                     
-                    <div className="formgroup">
+                    {/* <div className="formgroup">
                     <br/>
                         <label>Image</label>
                         <input type="file" name="img" className="form-control"/>
-                    </div>
+                    </div> */}
                     <br/>
                     <button className="btn btn-primary" type="submit">Ajouter</button>
                 </form>

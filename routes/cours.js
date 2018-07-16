@@ -44,7 +44,7 @@ coursRouter.post('/edit/:id', upload.single("img"), (req, res) => {
     let body = {
         title: req.body.title,
         body : req.body.body,
-        img: req.file.filename
+        // img: req.file.filename
     };
     Cours.findByIdAndUpdate(req.params.id ,body ,(err, film) => {
         if (err) return console.log(err)
@@ -68,5 +68,13 @@ coursRouter.get("/:id", (req, res) => {
         res.json(cour)
     })
 });
+
+
+coursRouter.delete("/:id", (req, res) => {
+    Cours.findById({_id: req.params.id}, (err, cour) => {
+        if(err) return console.log(err);
+        res.json(cour)
+    })
+})
 
 module.exports = coursRouter;
