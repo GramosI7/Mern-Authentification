@@ -13,7 +13,6 @@ class EditCours extends Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-
         axios.get(`/cours/${id}`)
             .then((response) => {
             this.setState({
@@ -23,11 +22,23 @@ class EditCours extends Component {
                 body : response.data.body,
                 img : response.data.img
             }, () => console.log("State of SingleCours : ", this.state.img))
-
         })
             .catch((error) => {
             console.log(error);
         })
+    }
+
+    onSubmit = () => {
+        const { id } = this.props.match.params;
+        const editCours = {
+            title : this.state.title,
+            body: this.state.body,
+            img: this.state.img
+            
+          }
+        axios.post(`/cours/edit/${id}`, editCours)
+            .then(response => this.props.history.push("/cours"))
+            .catch(err => console.log(err));
     }
 
     handleOnChange = (e) => {
@@ -46,7 +57,7 @@ class EditCours extends Component {
                     <br/>
                     <h1>Modifier votre cours</h1>
                     
-                <form method='POST' action={`http://localhost:4000/cours/edit/${id}`} encType="multipart/form-data">
+                <form onSubmit={this.postData} method='POST' action={`http://localhost:4000/cours/edit/${id}`} encType="multipart/form-data">
                     
                     <div className="formgroup">
                     <br/>
