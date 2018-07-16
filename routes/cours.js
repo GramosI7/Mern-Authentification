@@ -1,21 +1,21 @@
 const express = require("express");
-// const multer = require("multer");
+const multer = require("multer");
 const Cours = require("../models/Cours")
 const passport = require("passport");
 
 
 const coursRouter = express.Router();
 
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, './client/public/uploads/')
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null, Date.now() + '-' + file.originalname )
-//     }
-//   });
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './client/public/uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname )
+    }
+  });
   
-//   var upload = multer({ storage: storage });
+  var upload = multer({ storage: storage });
 
 
 // All Cours
@@ -40,7 +40,7 @@ coursRouter.post('/add',passport.authenticate("jwt", {session: false}), (req, re
 });
 
 // Edit Cours 
-coursRouter.post('/edit/:id', (req, res) => {
+coursRouter.post('/edit/:id', upload.single("img"), (req, res) => {
     let body = {
         title: req.body.title,
         body : req.body.body,
