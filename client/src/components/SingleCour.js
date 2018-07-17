@@ -16,18 +16,9 @@ class SingleCour extends Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-
         axios.get(`/cours/${id}`)
-            .then((response) => {
-            console.log(response);
-            this.setState({
-                coursId : response.data,
-                text: response.data.body
-            }, () => console.log("State of SingleCours : ", this.state.text))
-        })
-            .catch((error) => {
-            console.log(error);
-        })
+            .then((response) => this.setState({ coursId : response.data, text: response.data.body}))
+            .catch((error) => console.log(error));
     }
 
     delete = () => {
