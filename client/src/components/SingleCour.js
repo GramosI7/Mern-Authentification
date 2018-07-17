@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {NavLink} from 'react-router-dom';
 import { connect } from "react-redux";
+import renderHTML from 'react-render-html';
+
 
 
 
 class SingleCour extends Component {
 
     state = {
-        coursId : []
+        coursId : [],
+        text: ""
     }
 
     componentDidMount() {
@@ -18,8 +21,9 @@ class SingleCour extends Component {
             .then((response) => {
             console.log(response);
             this.setState({
-                coursId : response.data
-            }, () => console.log("State of SingleCours : ", this.state.coursId))
+                coursId : response.data,
+                text: response.data.body
+            }, () => console.log("State of SingleCours : ", this.state.text))
         })
             .catch((error) => {
             console.log(error);
@@ -48,11 +52,10 @@ class SingleCour extends Component {
         return (
         <div className="container">
         <br/>
-            <h1>{coursId.title}</h1>
             <br/>
             <h3>Ecrit par {coursId.author}</h3>
             <br/>
-            <p>{coursId.body}</p>
+            {renderHTML(this.state.text)}
             
             {isAuthenticated ? editLinkGuest : null}
             

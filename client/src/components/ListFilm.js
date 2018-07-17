@@ -10,7 +10,7 @@ import "../style/Listfilm.css"
 class ListFilm extends React.Component {
     
     state = {
-        movie: []
+        cours: []
     }
 
     componentDidMount() {
@@ -18,7 +18,7 @@ class ListFilm extends React.Component {
         .then((response) => {
             // console.log(response);
             this.setState({
-                movie : response.data
+                cours : response.data
             }, () => console.log("state ! " ,this.state.movie))
           })
           .catch((error) => {
@@ -35,10 +35,10 @@ class ListFilm extends React.Component {
                 </h1>
                 <br/>
                 <div className="cours-container">
-                    {this.state.movie.map((element, index) => {
+                    {this.state.cours.map((element, index) => {
                         return (
                             <div key={index} className="card" style={{width: "18rem", marginTop : "30px"}} >
-                                <img className="card-img-top cours-container__img" src={`./uploads/${element.img}`} alt=""/>
+                                {/* <img className="card-img-top cours-container__img" src={`./uploads/${element.img}`} alt=""/> */}
                                 <div className="card-body">
                                 <hr/>
                                     <h5 className="card-title">{element.title}</h5>

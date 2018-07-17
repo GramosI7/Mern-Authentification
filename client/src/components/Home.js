@@ -7,7 +7,7 @@ class Home extends Component {
 
     state = {
         movie: [],
-        plus: 4
+        plus: 2     
     }
 
 

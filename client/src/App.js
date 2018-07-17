@@ -20,6 +20,8 @@ import EditCours from "./components/EditCours";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Footer from './components/Footer';
+import MediumText from "./components/MediumText";
+import EditMediumText from "./components/EditMediumText";
 
 // Check for token
 // Garde le user apres refresh
@@ -44,10 +46,10 @@ class App extends Component {
           <div>
           <Navbar />
               <Route exact path="/" component={Home} />
-              <Route exact path="/add" component={Input} />
+              <Route exact path="/add" component={MediumText} />
               <Route exact path="/cours" component={ListFilm} />
               <Route exact path="/cours/:id" component={SingleCour} />
-              <Route exact path="/cours/edit/:id" component={EditCours} />
+              <Route exact path="/cours/edit/:id" component={EditMediumText} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
           <Footer/>
